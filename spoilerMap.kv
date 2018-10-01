@@ -1,0 +1,54 @@
+#kivy 1.10.1
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+
+<ScreenMan>:
+	id: screenMan
+	transition: SlideTransition()
+	
+	Screen:
+		id: menuPage
+		name: 'menuPage'
+
+		Button:
+			size_hint: .3,.1
+			pos_hint: {'center_x':.5,'center_y':.5}
+			text: "load"
+			on_press: root.chooseFile(); root.current = 'lightWorldPage'
+
+	Screen:
+		id: lightWorldPage
+		name: 'lightWorldPage'
+		size: root.width, root.height
+					
+		Image:
+			id:lightWorldMap
+			index: 999
+			source: 'artAssets/lightMap.png'
+		
+		Button:
+			size_hint: .1, .1
+			pos: self.parent.width - self.parent.width/10, 0
+			font_size: self.parent.width/55
+			background_color: (1,1,1,0.3)
+			text: "Dark World"
+			on_press: root.current = 'darkWorldPage'; root.transition = SlideTransition(direction="right")
+			
+		
+	Screen:
+		id: darkWorldPage
+		name: 'darkWorldPage'
+		
+			
+		Image:
+			id:lightWorldMap
+			index: 999
+			source: 'artAssets/darkMap.png'
+			
+		Button:
+			size_hint: .1, .1
+			pos: self.parent.width - self.parent.width/10, 0
+			font_size: self.parent.width/55
+			background_color: (1,1,1,0.3)
+			text: "Light World"
+			on_press: root.current = 'lightWorldPage'; root.transition = SlideTransition(direction="left")
