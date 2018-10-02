@@ -9,28 +9,50 @@
 	Screen:
 		id: menuPage
 		name: 'menuPage'
-
+		
+		Image:
+			id: splashImage
+			index: 999
+			source: root.resource_path('artAssets/splash.png')
 		Button:
+			tooltip: 'Load v30 spoiler file'
+			background_color: 0,0,0,0
+			color: 0,0,0,0
 			size_hint: .3,.1
-			pos_hint: {'center_x':.5,'center_y':.5}
+			pos_hint: {'center_x':.7,'center_y':.3}
 			text: "load"
 			on_press: root.chooseFile(); root.current = 'lightWorldPage'
+			Image:
+				size_hint: 1,1
+				center_x: self.parent.center_x
+				center_y: self.parent.center_y			
+				source: root.resource_path('artAssets/load.png')
 
 	Screen:
 		id: lightWorldPage
 		name: 'lightWorldPage'
 		size: root.width, root.height
-					
-		Image:
-			id:lightWorldMap
-			index: 999
-			source: 'artAssets/lightMap.png'
+		ScatterLayout:
+			id: lightScatter
+			do_rotation: False
+			do_scale: True
+			do_translation: True
+			on_touch_up:
+			auto_bring_to_front: False
+			Image:
+				size: root.width *1.4, root.height*1.4
+				id:lightWorldMap
+				index: 999
+				allow_strech: False
+				keep_ratio: True
+				source: root.resource_path('artAssets/lightMap.png')
 		
 		Button:
 			size_hint: .1, .1
+			index: 0
 			pos: self.parent.width - self.parent.width/10, 0
 			font_size: self.parent.width/55
-			background_color: (1,1,1,0.3)
+			color: (1,0,0,1)
 			text: "Dark World"
 			on_press: root.current = 'darkWorldPage'; root.transition = SlideTransition(direction="right")
 			
@@ -38,17 +60,28 @@
 	Screen:
 		id: darkWorldPage
 		name: 'darkWorldPage'
+		size: root.width, root.height
 		
-			
-		Image:
-			id:lightWorldMap
-			index: 999
-			source: 'artAssets/darkMap.png'
+		ScatterLayout:
+			id: darkScatter
+			do_rotation: False
+			do_scale: True
+			do_translation: True
+			on_touch_up:
+			auto_bring_to_front: False			
+			Image:
+				size: root.width *1.4, root.height*1.4
+				id:darkWorldMap
+				index: 999
+				allow_strech: False
+				keep_ratio: True
+				source: root.resource_path('artAssets/darkMap.png')
 			
 		Button:
 			size_hint: .1, .1
+			index: 0
 			pos: self.parent.width - self.parent.width/10, 0
 			font_size: self.parent.width/55
-			background_color: (1,1,1,0.3)
+			color: (0,1,0,1)
 			text: "Light World"
 			on_press: root.current = 'lightWorldPage'; root.transition = SlideTransition(direction="left")
